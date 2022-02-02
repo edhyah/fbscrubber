@@ -4,6 +4,7 @@
 from enum import Enum
 from pathlib import Path
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import ui
 import argparse
@@ -49,6 +50,8 @@ class FacebookPhotoScraper:
         signal.signal(signal.SIGINT, self.exit_gracefully)
         signal.signal(signal.SIGTERM, self.exit_gracefully)
 
+        self.open_facebook()
+
     def exit_gracefully(self, *args):
         self.kill_now = True
 
@@ -86,6 +89,15 @@ class FacebookPhotoScraper:
         self.driver.execute_script('(arguments[0]).click();', nextphoto)
         time.sleep(1.5)
 
+    def click_menu(self):
+        try:
+            menu = self.driver.find_element_by_css_selector(
+                    '[aria-label=\"Actions for this post\"]')
+            menu.click()
+            time.sleep(1.5)
+        except:
+            print('[WARNING] Did not find menu button')
+
     def save_photos(self):
         time.sleep(1)
         if not os.path.exists(self.download_dir):
@@ -103,13 +115,7 @@ class FacebookPhotoScraper:
 
             # Get download link from menu
             anchors_found = False
-            try:
-                menu = self.driver.find_element_by_css_selector(
-                        '[aria-label=\"Actions for this post\"]')
-                menu.click()
-                time.sleep(1.5)
-            except:
-                print('[WARNING] Did not find menu button')
+            self.click_menu()
 
             anchors = self.driver.find_elements_by_tag_name('a')
             anchors = [a.get_attribute('href') for a in anchors]
@@ -169,8 +175,37 @@ class FacebookPhotoScraper:
 
     def delete_photos(self):
         # Open menu
-        menu = self.driver.find_element_by_css_selector('[aria-label=\"Actions for this post\"]')
-        menu.click()
+        #menu = self.driver.find_element_by_css_selector('[aria-label=\"Actions for this post\"]')
+        #menu.click()
+        pass
+
+    def remove_tags(self):
+        css_selector1 = 'div.oajrlxb2:nth-child(4)'
+        css_selector2 = 'div.oajrlxb2:nth-child(5)'
+        css_selector3 = 'div.g5ia77u1:nth-child(5)'
+        css_selectors = [css_selector1, css_selector2, css_selector3]
+
+        while not self.kill_now:
+            selector_found = False
+
+            for css_selector in css_selectors:
+                self.click_menu()
+                try:
+                    self.driver.find_element_by_css_selector(css_selector).click()
+                    time.sleep(1.5)
+                    self.driver.find_element_by_css_selector('[aria-label=\"OK\"]').click()
+                    time.sleep(1.5)
+                    selector_found = True
+                    break
+                except NoSuchElementException:
+                    continue
+
+            if not selector_found:
+                print('[WARNING] CSS selector to remove tag not found')
+                print('          URL of photo: ', self.driver.current_url)
+                print('          Skipping this photo...')
+
+            self.navigate_to_next_photo()
 
     @staticmethod
     def get_numbered_date(date_str):    # ex. 'January 5, 2017' -> '20170105'
@@ -206,7 +241,6 @@ def main():
     args = parse_arguments()
 
     scraper = FacebookPhotoScraper(args.profile_url)
-    scraper.open_facebook()
 
     if args.action == 'save-uploaded-photos':
         scraper.navigate_to_first_photo(photo_type=FacebookPhotoScraper.PhotoType.PHOTOS_BY)
@@ -217,9 +251,8 @@ def main():
     elif args.action == 'delete-uploaded-photos':
         raise NotImplementedError
     elif args.action == 'remove-tagged-photos':
-        raise NotImplementedError
-    elif args.action == 'delete-uploaded-photos':
-        raise NotImplementedError
+        scraper.navigate_to_first_photo(photo_type=FacebookPhotoScraper.PhotoType.PHOTOS_OF)
+        scraper.remove_tags()
     elif args.action == 'delete-posts':
         raise NotImplementedError
 
