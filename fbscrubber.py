@@ -173,12 +173,6 @@ class FacebookPhotoScraper:
         # Remove temp directory
         os.rmdir(self.download_dir)
 
-    def delete_photos(self):
-        # Open menu
-        #menu = self.driver.find_element_by_css_selector('[aria-label=\"Actions for this post\"]')
-        #menu.click()
-        pass
-
     def remove_tags(self):
         css_selector1 = 'div.oajrlxb2:nth-child(4)'
         css_selector2 = 'div.oajrlxb2:nth-child(5)'
@@ -233,8 +227,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument('profile_url', type=str, help='URL to profile page')
     parser.add_argument('action', choices=('save-uploaded-photos',
-        'save-tagged-photos', 'delete-uploaded-photos', 'remove-tagged-photos',
-        'delete-posts'))
+        'save-tagged-photos', 'remove-tagged-photos', 'delete-posts'))
     return parser.parse_args()
 
 def main():
@@ -248,8 +241,6 @@ def main():
     elif args.action == 'save-tagged-photos':
         scraper.navigate_to_first_photo(photo_type=FacebookPhotoScraper.PhotoType.PHOTOS_OF)
         scraper.save_photos()
-    elif args.action == 'delete-uploaded-photos':
-        raise NotImplementedError
     elif args.action == 'remove-tagged-photos':
         scraper.navigate_to_first_photo(photo_type=FacebookPhotoScraper.PhotoType.PHOTOS_OF)
         scraper.remove_tags()

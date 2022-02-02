@@ -3,10 +3,10 @@
 The Facebook Scrubber allows you do scrub up your Facebook profile of content
 you may have uploaded or been tagged in years ago but now want to remove. Using
 the Facebook Scrubber, you can save (in chronological order) all of the photos
-you uploaded or were tagged in, delete all of the photos you uploaded, remove
-all tags from of your tagged photos, and/or delete all of the posts you've made
-on Facebook.  This is probably useful if you, like me, were raised in the
-Internet age and have way too many photos and posts to delete manually.
+you uploaded or were tagged in, remove all tags from of your tagged photos,
+and/or delete all of the posts you've made on Facebook.  This is probably useful
+if you, like me, were raised in the Internet age and have way too many photos
+and posts to delete manually.
 
 There are alternative ways to do this, but from my cursory look across the
 Internet, nothing seemed to work for me. For example:
@@ -22,17 +22,17 @@ Internet, nothing seemed to work for me. For example:
 
 Note the code is not guaranteed to work for you if Facebook changed its page
 structure, so just in case I recommend saving your photos using my code first
-before going on and deleting things. Last time I successfully ran all of the
-code was on February 1, 2022.
+before going on and deleting/removing things. Last time I successfully ran all
+of the code was on February 1, 2022.
 
 I don't save your password.
 
 ## Dependencies
 
-* [chromedriver](https://chromedriver.chromium.org/home) (make sure to put this
-  executable in your `$PATH`)
+First, download [chromedriver](https://chromedriver.chromium.org/home) (make
+sure to put this executable in your `$PATH`).
 
-## Installation
+Then, setup your virtual environment.
 
 ```bash
 python3 -m virtualenv venv
