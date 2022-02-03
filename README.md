@@ -23,7 +23,7 @@ Internet, nothing seemed to work for me. For example:
 Note the code is not guaranteed to work for you if Facebook changed its page
 structure, so just in case I recommend saving your photos using my code first
 before going on and deleting/removing things. Last time I successfully ran all
-of the code was on February 1, 2022.
+of the code was on February 2022.
 
 I don't save your password.
 
@@ -49,11 +49,11 @@ python fbscrubber.py -h
 ```
 
 If you're running into bugs (see below) and you want your iteration time to be
-quicker, I recommend opening up the Python interpreter, running the command
-`from fbscrubber import FacebookPhotoScraper`, and manually running the code in
-the main function. This way, if something goes wrong, you can call functions
-like `save_photos` or `remove_tags` again and again, resuming from where the
-program crashed (instead of having to run the entire program again).
+quicker, I recommend opening up the Python interpreter and manually running the
+code in the main function of `fbscrubber.py`. This way, if something goes wrong,
+you can call functions like `save_photos` or `remove_tags` again and again,
+resuming from where the program crashed (instead of having to run the entire
+program again).
 
 ## Bugs
 
