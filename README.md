@@ -36,7 +36,7 @@ Then, setup your virtual environment.
 
 ```bash
 python3 -m virtualenv venv
-source activate venv/bin/activate
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 

@@ -59,12 +59,12 @@ class FacebookPhotoScraper:
         class FacebookLoaded:
             def __call__(self, driver):
                 return driver.find_element_by_tag_name('body') != None
-        
+
         # Open the web browser
         self.driver.get('https://www.facebook.com')
         wait = ui.WebDriverWait(self.driver, 10)
         wait.until(FacebookLoaded())
-        
+
         # Submit email and password
         email = self.driver.find_element_by_id('email')
         email.send_keys(self.input_email_id)
