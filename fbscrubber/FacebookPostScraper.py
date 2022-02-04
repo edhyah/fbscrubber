@@ -5,7 +5,7 @@ from selenium.common.exceptions import ElementClickInterceptedException
 from selenium.common.exceptions import NoSuchElementException
 import time
 
-from FacebookLauncher import FacebookLauncher
+from .FacebookLauncher import FacebookLauncher
 
 class FacebookPostScraper(FacebookLauncher):
 

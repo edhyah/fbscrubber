@@ -7,7 +7,7 @@ import os
 import shutil
 import time
 
-from FacebookLauncher import FacebookLauncher
+from .FacebookLauncher import FacebookLauncher
 
 class FacebookPhotoScraper(FacebookLauncher):
 

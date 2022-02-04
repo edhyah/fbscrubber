@@ -35,25 +35,36 @@ sure to put this executable in your `$PATH`).
 Then, setup your virtual environment.
 
 ```bash
-python3 -m virtualenv venv
-source venv/bin/activate
-pip install -r requirements.txt
+$ python3 -m virtualenv venv
+$ source venv/bin/activate
+$ pip install -r requirements.txt
 ```
 
 ## Usage
 
-For usage information, use the command below.
+There are two ways to run the scrubber. To run the scrubber normally, use the
+command below.
 
 ```bash
-python fbscrubber.py -h
+$ python run.py -h
 ```
 
-If you're running into bugs (see below) and you want your iteration time to be
-quicker, I recommend opening up the Python interpreter and manually running the
-code in the main function of `fbscrubber.py`. This way, if something goes wrong,
-you can call functions like `save_photos` or `remove_tags` again and again,
-resuming from where the program crashed (instead of having to run the entire
-program again).
+If you're running into bugs (see section below) and you want your iteration time
+to be quicker, I recommend running the scrubber interactively. I personally like
+running the scrubber interactively for the flexibility it provides too (ex. I
+can initialize the scrubber, filter out posts that I want to keep manually, and
+then run the scrubber to delete posts). To do this, use the following commands.
+
+```bash
+$ python
+Python 3.8.9 (default, Jul 19 2021, 09:37:30)
+[Clang 13.0.0 (clang-1300.0.27.3)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from interactive import *
+```
+
+From this point, you can use commands like `scraper.delete_posts()` in the
+Python interpreter at your own speed. For help on what to do, look at `run.py`.
 
 ## Bugs
 
@@ -84,5 +95,5 @@ You can contact me at <<edward@edwardahn.me>>, but I probably won't be fixing
 the code to continue to work with Facebook's changing UI. I figured this
 codebase could be a good reference point for someone else though.
 
-Goes without saying, but I'm not responsible for any data lost.
+I'm not responsible for any data lost.
 

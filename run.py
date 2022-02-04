@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from FacebookPhotoScraper import FacebookPhotoScraper
-from FacebookPostScraper import FacebookPostScraper
+from fbscrubber import FacebookPhotoScraper, FacebookPostScraper
 import argparse
 
 def parse_arguments():
@@ -28,6 +27,7 @@ def main():
         scraper.remove_tags()
     elif args.action == 'delete-posts':
         scraper = FacebookPostScraper(args.profile_url)
+        scraper.navigate_to_timeline()
         scraper.delete_posts()
 
 if __name__ == '__main__':

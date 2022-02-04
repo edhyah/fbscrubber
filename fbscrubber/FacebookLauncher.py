@@ -19,7 +19,7 @@ class FacebookLauncher:
             self.profile_url += '/'
 
         # Take inputs from the console
-        self.input_email_id = input('Enter Username: ')
+        self.input_email_id = input('Username: ')
         self.input_pwd = getpass.getpass()
 
         # Disable notifications and set download directory
