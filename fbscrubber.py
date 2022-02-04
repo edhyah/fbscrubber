@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from FacebookPhotoScraper import FacebookPhotoScraper
+from FacebookPostScraper import FacebookPostScraper
 import argparse
 
 def parse_arguments():
@@ -13,20 +14,21 @@ def parse_arguments():
 
 def main():
     args = parse_arguments()
-
-    scraper = FacebookPhotoScraper(args.profile_url)
-
     if args.action == 'save-uploaded-photos':
+        scraper = FacebookPhotoScraper(args.profile_url)
         scraper.navigate_to_first_photo(photo_type=FacebookPhotoScraper.PhotoType.PHOTOS_BY)
         scraper.save_photos()
     elif args.action == 'save-tagged-photos':
+        scraper = FacebookPhotoScraper(args.profile_url)
         scraper.navigate_to_first_photo(photo_type=FacebookPhotoScraper.PhotoType.PHOTOS_OF)
         scraper.save_photos()
     elif args.action == 'remove-tagged-photos':
+        scraper = FacebookPhotoScraper(args.profile_url)
         scraper.navigate_to_first_photo(photo_type=FacebookPhotoScraper.PhotoType.PHOTOS_OF)
         scraper.remove_tags()
     elif args.action == 'delete-posts':
-        raise NotImplementedError
+        scraper = FacebookPostScraper(args.profile_url)
+        scraper.delete_posts()
 
 if __name__ == '__main__':
     main()

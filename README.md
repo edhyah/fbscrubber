@@ -75,6 +75,8 @@ program again).
   Firefox, right-click the mouse, click "Inspect", find the element you want a
   CSS selector for, right-click the HTML tag of the element you want, and copy
   the CSS selector. For some reason, this doesn't work on Chrome well.
+* You may have to play around with how much with `time.sleep` calls depending on
+  your internet connection.
 
 ## Contact
 
