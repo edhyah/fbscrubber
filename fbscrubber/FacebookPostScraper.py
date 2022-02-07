@@ -63,19 +63,25 @@ class FacebookPostScraper(FacebookLauncher):
         return menu_buttons
 
     def delete_post(self):
-        delete_selector = 'div.qu0x051f:nth-child(3)'
+        delete_selector1 = 'div.qu0x051f:nth-child(3)'
+        delete_selector2 = 'div.dwo3fsh8:nth-child(3)'
+        delete_selectors = [delete_selector1, delete_selector2]
         confirm_selector = '[aria-label=\"Delete\"]'
         deleted = False
-        try:
-            delete = self.driver.find_element_by_css_selector(delete_selector)
-            delete.click()
-            time.sleep(1)
-            confirm = self.driver.find_element_by_css_selector(confirm_selector)
-            confirm.click()
-            time.sleep(1)
-            deleted = True
-        except NoSuchElementException:
-            pass
+
+        for delete_selector in delete_selectors:
+            try:
+                delete = self.driver.find_element_by_css_selector(delete_selector)
+                delete.click()
+                time.sleep(2)
+                confirm = self.driver.find_element_by_css_selector(confirm_selector)
+                confirm.click()
+                time.sleep(2)
+                deleted = True
+                break
+            except NoSuchElementException:
+                pass
+
         return deleted
 
     def delete_posts(self):
@@ -89,7 +95,10 @@ class FacebookPostScraper(FacebookLauncher):
                 menu_button.click()
                 time.sleep(2)
                 if not self.delete_post():
-                    menu_button.click()
+                    try:
+                        menu_button.click()
+                    except:
+                        continue
             # Exception sometimes triggers when menu button not in view
             except ElementClickInterceptedException:
                 self.scroll_down()
@@ -101,4 +110,6 @@ class FacebookPostScraper(FacebookLauncher):
                         menu_button.click()
                 except:
                     continue
+            except:
+                continue
 

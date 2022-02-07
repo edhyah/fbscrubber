@@ -65,6 +65,8 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 From this point, you can use commands like `scraper.delete_posts()` in the
 Python interpreter at your own speed. For help on what to do, look at `run.py`.
+Make sure to go inside `interactive.py` and update the `profile_url` variable
+with the URL of your Facebook profile page.
 
 ## Bugs
 
@@ -79,6 +81,8 @@ Python interpreter at your own speed. For help on what to do, look at `run.py`.
   manually save/delete these photos too.
 * Some photos don't even show up on Facebook. I skip these, and unfortunately
   can't even save them manually.
+* Some posts have trouble being deleted, as the delete button seems to not be
+  interactable. I delete these posts manually.
 
 ## Notes
 
@@ -93,7 +97,8 @@ Python interpreter at your own speed. For help on what to do, look at `run.py`.
 
 You can contact me at <<edward@edwardahn.me>>, but I probably won't be fixing
 the code to continue to work with Facebook's changing UI. I figured this
-codebase could be a good reference point for someone else though.
+codebase could be a good reference point for someone else though. The code isn't
+exactly clean, but hopefully is readable.
 
 I'm not responsible for any data lost.
 
